@@ -45,7 +45,7 @@ namespace thread_pool {
 
 	class ThreadPool {
 	public:
-		ThreadPool(int thread_num) : thread_num_(thread_num), is_shut_down_(false) {}
+		ThreadPool(int thread_num) : thread_num_(thread_num) {}
 
 		void Init() {
 			for (int i = 0; i < thread_num_; ++i) {
@@ -108,7 +108,7 @@ namespace thread_pool {
 		}
 
 	private:
-		bool is_shut_down_;
+		bool is_shut_down_ = false;
 		const int thread_num_;
 		SafeQueue<std::function<void()>> task_queue_;
 		std::vector<std::shared_ptr<std::thread>> worker_threads_;
