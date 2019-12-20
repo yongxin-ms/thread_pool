@@ -5,14 +5,11 @@
 
 class CalPoolExample {
 public:
-	CalPoolExample() : pool_(3) {};
-	~CalPoolExample() {
-		pool_.ShutDown();
-	}
+	CalPoolExample()
+		: pool_(3){};
+	~CalPoolExample() { pool_.ShutDown(); }
 
-	void Init() {
-		pool_.Init();
-	}
+	void Init() { pool_.Init(); }
 
 	int Update() {
 		int count = 0;
@@ -24,8 +21,7 @@ public:
 
 				auto ret = future->future.get();
 				future->func(ret);
-			}
-			else {
+			} else {
 				it++;
 			}
 		}
@@ -39,9 +35,7 @@ public:
 		futures_.push_back(future);
 	}
 
-	bool Empty() {
-		return futures_.empty();
-	}
+	bool Empty() { return futures_.empty(); }
 
 private:
 	static int ThreadProc(int x, int y) {
@@ -51,7 +45,7 @@ private:
 		return ret;
 	}
 
-	template<typename R>
+	template <typename R>
 	static bool is_ready(std::future<R> const& f) {
 		return f.wait_for(std::chrono::seconds(0)) == std::future_status::ready;
 	}
@@ -74,9 +68,7 @@ int main() {
 		int x = rand() % 1000;
 		int y = rand() % 3000;
 
-		mgr.PushTask(x, y, [x, y](int ret) {
-			printf("Calculate finished x:%d, y:%d, ret:%d\n", x, y, ret);
-		});
+		mgr.PushTask(x, y, [x, y](int ret) { printf("Calculate finished x:%d, y:%d, ret:%d\n", x, y, ret); });
 	}
 
 	while (true) {
