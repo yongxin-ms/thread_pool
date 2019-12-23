@@ -68,7 +68,8 @@ int main() {
 		int x = rand() % 1000;
 		int y = rand() % 3000;
 
-		mgr.PushTask(x, y, [x, y](int ret) { printf("Calculate finished x:%d, y:%d, ret:%d\n", x, y, ret); });
+		mgr.PushTask(x, y,
+			[x, y](int ret) { printf("Calculate finished x:%d, y:%d, ret:%d\n", x, y, ret); });
 	}
 
 	while (true) {
