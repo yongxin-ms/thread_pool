@@ -60,7 +60,7 @@ private:
 };
 
 int main() {
-	srand(time(nullptr));
+	srand((unsigned int)time(nullptr));
 	CalPoolExample mgr;
 	mgr.Init();
 
